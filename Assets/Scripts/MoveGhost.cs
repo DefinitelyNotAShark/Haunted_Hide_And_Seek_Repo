@@ -56,4 +56,27 @@ public class MoveGhost : MonoBehaviour
         //MOVE
         transform.Translate(Vector3.forward * Time.deltaTime * ghostMoveSpeed);
     }
+
+    public void GoToPlayerLocation()
+    {
+        //IF NOT CLOSE ENOUGH TO PLAYER
+        if(Vector3.Distance(transform.position, player.transform.position) > 1)
+        {
+            Vector3.MoveTowards(transform.position, player.transform.position, ghostMoveSpeed * Time.deltaTime);
+        }
+        //IF CLOSE ENOUGH
+        else
+        {
+            Debug.Log("YOU GOT GOT SON");
+        }
+    }
+
+    public void CheckHidingSpot()
+    {
+        /*
+         * Get position();
+         * Get waypoint it's moving towards();
+       
+        */
+    }
 }
