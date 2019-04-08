@@ -646,11 +646,11 @@ GameObject:
   - component: {fileID: 524522117}
   - component: {fileID: 524522116}
   - component: {fileID: 524522115}
-  - component: {fileID: 524522119}
   - component: {fileID: 524522118}
   - component: {fileID: 524522114}
   - component: {fileID: 524522113}
   - component: {fileID: 524522120}
+  - component: {fileID: 524522121}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -734,7 +734,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 524522112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1000061, y: 0.5200043, z: 0.01}
+  m_LocalPosition: {x: -20.4, y: 0.5, z: 0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 116634151}
@@ -756,17 +756,7 @@ MonoBehaviour:
   ghostMoveSpeed: 15
   ghostRotationSpeed: 20
   patrolPointsParent: {fileID: 46457168}
---- !u!114 &524522119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 524522112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408805f1bc3574147ab90b10c9f77b81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  patrolPoints: []
 --- !u!195 &524522120
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -788,6 +778,24 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &524522121
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 524522112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69305b48bcdf60a48945215619087a7f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &552634129
 Prefab:
   m_ObjectHideFlags: 0

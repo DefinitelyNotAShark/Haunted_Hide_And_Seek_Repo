@@ -14,7 +14,7 @@ public class MoveGhost : MonoBehaviour
     [SerializeField]
     private GameObject patrolPointsParent;//get the parent of all the points so I can get them in the script
 
-    private List<Transform> patrolPoints;//this'll tell us where the ghost is going next
+    public List<Transform> patrolPoints;//this'll tell us where the ghost is going next
     private Vector3 PatrolPointPosition
     {
         get  { return patrolPoints[patrolIndex].position; }//will always get the right value in the list so I only have to change the index
