@@ -6,14 +6,22 @@ using System;
 //Grid manager class handles all the grid properties
 public class GridManager : MonoBehaviour
 {
-    public Transform startPosition;
-    public LayerMask wallMask;
-    public Vector2 gridWorldSize;
-    public float nodeRadius;
-    public float distance;
+    [HideInInspector]
+    public List<Node> FinalPath;
 
-    Node[,] grid;
-    public List<Node> finalPath;
+    [SerializeField]
+    private Transform startPosition;
+
+    [SerializeField]
+    private LayerMask wallMask;
+
+    [SerializeField]
+    private Vector2 gridWorldSize;
+
+    [SerializeField]
+    private float nodeRadius, distance;
+
+    private Node[,] grid;
 
     private float nodeDiameter;
     private int gridSizeX, gridSizeY;
@@ -49,6 +57,25 @@ public class GridManager : MonoBehaviour
                 grid[x, y] = new Node(wall, worldPoint, x, y);
             }
         }
+    }
+
+    internal List<Node> GetNeighborNodes(Node node)
+    {
+        List<Node> NeighboringNodes = new List<Node>();
+    }
+
+    public Node GetNodeFromWorldPosition(Vector3 worldPosition)
+    {
+        float xPoint = (worldPosition.x + (gridWorldSize.x / 2)) / gridWorldSize.x;
+        float yPoint = (worldPosition.z + (gridWorldSize.y / 2)) / gridWorldSize.y;//should it really be .z tho?
+
+        xPoint = Mathf.Clamp01(xPoint);
+        yPoint = Mathf.Clamp01(yPoint);
+
+        int x = Mathf.RoundToInt((gridSizeX - 1) * xPoint);
+        int y = Mathf.RoundToInt((gridSizeY - 1) * yPoint);
+
+        return grid[x, y];
     }
 
     public void OnDrawGizmos()
