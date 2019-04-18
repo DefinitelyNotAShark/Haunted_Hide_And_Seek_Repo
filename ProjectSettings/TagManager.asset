@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - HidingSpot
+  - Obstacle
+  - Start
+  - End
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - PostProcessing
   - HidingSpot
   - Player
-  - 
+  - Wall
   - 
   - 
   - 
