@@ -252,6 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 119833583}
+  - component: {fileID: 119833584}
   m_Layer: 12
   m_Name: HidingSpotLookPoint
   m_TagString: Untagged
@@ -272,6 +273,17 @@ Transform:
   m_Father: {fileID: 1245484557}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119833584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 119833582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &143610418
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143610419}
+  - component: {fileID: 143610420}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (13)
   m_TagString: Untagged
@@ -300,6 +313,17 @@ Transform:
   m_Father: {fileID: 815570467}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &143610420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 143610418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &158047847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4560121705694562, guid: 263921e6c6c325946a5fbe4c66f4ac1d,
@@ -412,6 +436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 310692452}
+  - component: {fileID: 310692453}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (4)
   m_TagString: Untagged
@@ -432,6 +457,17 @@ Transform:
   m_Father: {fileID: 2090145567}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &310692453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 310692451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &326894762
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 398829288}
+  - component: {fileID: 398829289}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (16)
   m_TagString: Untagged
@@ -583,6 +620,17 @@ Transform:
   m_Father: {fileID: 1006586853}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &398829289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 398829287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &472719672
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,6 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 472719673}
+  - component: {fileID: 472719674}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (14)
   m_TagString: Untagged
@@ -611,6 +660,17 @@ Transform:
   m_Father: {fileID: 1699849281}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &472719674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 472719672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &516251438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4235811164324838, guid: 263921e6c6c325946a5fbe4c66f4ac1d,
@@ -827,49 +887,24 @@ Prefab:
       objectReference: {fileID: 353678949}
     - target: {fileID: 65965387713802490, guid: 41494d07fc5f5ca45bfa00c355d97657,
         type: 2}
-      propertyPath: m_Size.z
-      value: 1.0208778
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 65965387713802490, guid: 41494d07fc5f5ca45bfa00c355d97657,
+    - target: {fileID: 54579823194348976, guid: 41494d07fc5f5ca45bfa00c355d97657,
         type: 2}
-      propertyPath: m_Center.z
-      value: -0.037373662
+      propertyPath: m_Constraints
+      value: 116
       objectReference: {fileID: 0}
-    - target: {fileID: 65965387713802490, guid: 41494d07fc5f5ca45bfa00c355d97657,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.0154915
-      objectReference: {fileID: 0}
-    - target: {fileID: 65965387713802490, guid: 41494d07fc5f5ca45bfa00c355d97657,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 0.057723
-      objectReference: {fileID: 0}
-    - target: {fileID: 1279427838424108, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1629686131183214, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1692175738580716, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1279427838424108, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
+    - target: {fileID: 4315234125243904, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1629686131183214, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1692175738580716, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65392820310931262, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 41494d07fc5f5ca45bfa00c355d97657, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &620898086
@@ -913,6 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 683495342}
+  - component: {fileID: 683495343}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (5)
   m_TagString: Untagged
@@ -933,6 +969,17 @@ Transform:
   m_Father: {fileID: 528124628}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &683495343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 683495341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &692569026
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,6 +988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692569027}
+  - component: {fileID: 692569028}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (10)
   m_TagString: Untagged
@@ -961,6 +1009,17 @@ Transform:
   m_Father: {fileID: 1088399383}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &692569028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 692569026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &725969685
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +1028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 725969686}
+  - component: {fileID: 725969687}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (6)
   m_TagString: Untagged
@@ -989,6 +1049,17 @@ Transform:
   m_Father: {fileID: 967290126}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &725969687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725969685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &814146356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,6 +1101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818187850}
+  - component: {fileID: 818187851}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (17)
   m_TagString: Untagged
@@ -1050,6 +1122,17 @@ Transform:
   m_Father: {fileID: 158047847}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &818187851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818187849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &819799997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4006201560301656, guid: 263921e6c6c325946a5fbe4c66f4ac1d,
@@ -1091,6 +1174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 843530075}
+  - component: {fileID: 843530076}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (12)
   m_TagString: Untagged
@@ -1111,6 +1195,17 @@ Transform:
   m_Father: {fileID: 1912427455}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &843530076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 843530074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &868712487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 868712488}
+  - component: {fileID: 868712489}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (1)
   m_TagString: Untagged
@@ -1139,6 +1235,17 @@ Transform:
   m_Father: {fileID: 516251438}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &868712489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 868712487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &899661387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1351,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1007416966}
+  - component: {fileID: 1007416967}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (7)
   m_TagString: Untagged
@@ -1264,6 +1372,17 @@ Transform:
   m_Father: {fileID: 75836052}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007416967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1007416965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1088399383 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4177879645023408, guid: 263921e6c6c325946a5fbe4c66f4ac1d,
@@ -1481,6 +1600,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1352483787}
+  - component: {fileID: 1352483788}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (8)
   m_TagString: Untagged
@@ -1501,6 +1621,17 @@ Transform:
   m_Father: {fileID: 253596209}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1352483788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352483786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1359267931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,6 +1740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1529551387}
+  - component: {fileID: 1529551388}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (9)
   m_TagString: Untagged
@@ -1629,6 +1761,17 @@ Transform:
   m_Father: {fileID: 342246306}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1529551388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1529551386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1542503349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +1808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1544949146}
+  - component: {fileID: 1544949147}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (11)
   m_TagString: Untagged
@@ -1685,6 +1829,17 @@ Transform:
   m_Father: {fileID: 675572475}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1544949147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1544949145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585355277
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,6 +1967,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4314838516686032, guid: 41494d07fc5f5ca45bfa00c355d97657,
     type: 2}
   m_PrefabInternal: {fileID: 552634129}
+--- !u!65 &1898198622
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1898198620}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1900374405
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1900374406}
+  - component: {fileID: 1900374407}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (2)
   m_TagString: Untagged
@@ -1840,6 +2008,17 @@ Transform:
   m_Father: {fileID: 1428323145}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1900374407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1900374405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1910024552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,6 +2027,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1910024553}
+  - component: {fileID: 1910024554}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (3)
   m_TagString: Untagged
@@ -1868,6 +2048,17 @@ Transform:
   m_Father: {fileID: 1365867438}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1910024554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1910024552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1912427455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4709108614189806, guid: 263921e6c6c325946a5fbe4c66f4ac1d,
@@ -1881,6 +2072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1986202497}
+  - component: {fileID: 1986202498}
   m_Layer: 12
   m_Name: HidingSpotLookPoint (15)
   m_TagString: Untagged
@@ -1901,6 +2093,17 @@ Transform:
   m_Father: {fileID: 819799997}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1986202498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1986202496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e23346b98d0b6e4daea9e8f22743b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2006386954
 Prefab:
   m_ObjectHideFlags: 0

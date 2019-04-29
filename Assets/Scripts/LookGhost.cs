@@ -24,16 +24,14 @@ public class LookGhost : MonoBehaviour
         if (isHidingSpot(other.gameObject) && shouldCheckHidingSpot())//if it sees a hiding spot and decides to check it,
         {
             Debug.Log("I am going to check this hiding spot");
-
-            if (!HidingSpotsChecked.Contains(other.transform.position))//get the hiding spot look point
-            {
                 Vector3 hidingSpotPositionToCheck = other.gameObject.GetComponentInChildren<hi>().gameObject.transform.position;
-            
-                HidingSpotPositions.Add(hidingSpotPositionToCheck);//add the transform to the list of spots to check if it hasn't already been added
-                HidingSpotsChecked.Add(hidingSpotPositionToCheck);//lets the ghost know not to check that one for a while
-            }
 
-            animator.SetBool("CheckHidingSpot", true);
+            if (!HidingSpotsChecked.Contains(hidingSpotPositionToCheck))//get the hiding spot look point
+            {
+                HidingSpotPositions.Add(hidingSpotPositionToCheck);//add the transform to the list of spots to check 
+                HidingSpotsChecked.Add(hidingSpotPositionToCheck);//lets the ghost know not to check that one for a while...clear it when seeking
+                animator.SetBool("CheckHidingSpot", true);
+            }
         }        
 
         if (isPlayer(other.gameObject))
@@ -100,5 +98,14 @@ public class LookGhost : MonoBehaviour
             return true;
 
         else return false;
+    }
+
+
+    /// <summary>
+    /// Clears the list of spots already checked. Do this when the ghost is seeking the player
+    /// </summary>
+    public void ClearCheckedList()
+    {
+        HidingSpotsChecked.Clear();
     }
 }

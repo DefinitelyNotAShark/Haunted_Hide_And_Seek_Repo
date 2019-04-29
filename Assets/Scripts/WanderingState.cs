@@ -39,8 +39,7 @@ public class WanderingState : StateMachineBehaviour
 
         path = new List<Node>();//create a local ref to the path that the gridScript goes to
 
-        pathIndex = 0;
-        patrolIndex = 0;
+        pathIndex = 0;       
         GetNewPoint();//find the path to the patrol point;
     }
 
