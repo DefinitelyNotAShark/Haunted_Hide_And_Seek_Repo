@@ -62,6 +62,54 @@ public class GridManager : MonoBehaviour
     internal List<Node> GetNeighborNodes(Node node)
     {
         List<Node> NeighboringNodes = new List<Node>();
+
+        int xCheck, yCheck;
+
+        //RIGHT SIDE
+        xCheck = node.gridX + 1;
+        yCheck = node.gridY;
+        if(xCheck >= 0 && xCheck < gridSizeX)
+        {
+            if (yCheck >= 0 && yCheck < gridSizeY)
+            {
+                NeighboringNodes.Add(grid[xCheck, yCheck]);
+            }
+        } 
+        
+        //LEFT SIDE
+        xCheck = node.gridX - 1;//this is the difference. Sub 1 instead of adding
+        yCheck = node.gridY;
+        if(xCheck >= 0 && xCheck < gridSizeX)
+        {
+            if (yCheck >= 0 && yCheck < gridSizeY)
+            {
+                NeighboringNodes.Add(grid[xCheck, yCheck]);
+            }
+        }  
+        
+        //TOP
+        xCheck = node.gridX;
+        yCheck = node.gridY + 1;
+        if(xCheck >= 0 && xCheck < gridSizeX)
+        {
+            if (yCheck >= 0 && yCheck < gridSizeY)
+            {
+                NeighboringNodes.Add(grid[xCheck, yCheck]);
+            }
+        }
+
+        //BOTTOM
+        xCheck = node.gridX;
+        yCheck = node.gridY - 1;
+        if(xCheck >= 0 && xCheck < gridSizeX)
+        {
+            if (yCheck >= 0 && yCheck < gridSizeY)
+            {
+                NeighboringNodes.Add(grid[xCheck, yCheck]);
+            }
+        }
+
+        return NeighboringNodes;
     }
 
     public Node GetNodeFromWorldPosition(Vector3 worldPosition)
@@ -95,9 +143,10 @@ public class GridManager : MonoBehaviour
                     Gizmos.color = Color.yellow;
                 }
 
-                if(finalPath != null)
+                if (FinalPath != null)
                 {
-                    Gizmos.color = Color.red;
+                    if (FinalPath.Contains(node))
+                        Gizmos.color = Color.red;
                 }
 
                 Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - distance));

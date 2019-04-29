@@ -7,11 +7,10 @@ public class LookGhost : MonoBehaviour
     [SerializeField]
     private float lengthOfSight;
 
-    private Animator animator;
+    [HideInInspector]
+    public Vector3 LastKnownLocation;
 
-    private void Start()
-    {
-    }
+    private Animator animator;
 
     private void OnTriggerEnter(Collider other)//change the state based on what the ghost sees
     {
@@ -20,13 +19,24 @@ public class LookGhost : MonoBehaviour
         if (isHidingSpot(other.gameObject) && shouldCheckHidingSpot())//if it sees a hiding spot and decides to check it,
         {
             Debug.Log("I am going to check this hiding spot");
-            animator.SetTrigger("CheckHidingSpot");
+            animator.SetBool("CheckHidingSpot", true);
+            GetComponentInParent<Ghost>().HidingSpotPosition.Add(other.transform)
         }
 
         if (isPlayer(other.gameObject))
         {
             Debug.Log("I know where you are");
-            animator.SetTrigger("Chasing");
+            animator.SetBool("PlayerIsInLineOfSight", true);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)//if the player is still there, make sure the bool's set to canSeePlayer
+    {
+        animator = GetComponentInParent<Animator>();
+
+        if (isPlayer(other.gameObject))
+        {
+            animator.SetBool("PlayerIsInLineOfSight", true);
         }
     }
 
@@ -37,28 +47,31 @@ public class LookGhost : MonoBehaviour
         if (isPlayer(other.gameObject))
         {
             Debug.Log("I know where you were, and am going to check around it");
-            animator.SetTrigger("Seeking");
+            animator.SetBool("HasSeenPlayer", true);//remembers that it saw the player for the duration of the seeking state
+            animator.SetBool("PlayerIsInLineOfSight", false);//can't directly see the player anymore
+            LastKnownLocation = other.transform.position;//this is where we're going to go 
         }
     }
 
     private bool shouldCheckHidingSpot()//checks hiding spots 50% of the time while wandering and 100% of the time while seeking
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Wandering"))//if it's wandering around, 50% chance it checks
-        {
-            if (Random.Range(0, 2) == 1)//chooses a number between 0 and 1. On the chance that it's a 1, we check the spot. otherwise we don't
-            {
-                return true;
-            }
-            else
-            {
-                Debug.Log("I decided not to check this hiding spot");
-                return false;
-            }
-        }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Seeking"))//if it's looking in a small area for the player, it always checks
-            return true;
+        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("Wandering"))//if it's wandering around, 50% chance it checks
+        //{
+        //    if (Random.Range(0, 2) == 1)//chooses a number between 0 and 1. On the chance that it's a 1, we check the spot. otherwise we don't
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("I decided not to check this hiding spot");
+        //        return false;
+        //    }
+        //}
+        //else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Seeking"))//if it's looking in a small area for the player, it always checks
+        //    return true;
 
-        else return false;//it should not have to check a hiding spot if it already knows where the player is
+        // else
+        return false;//it should not have to check a hiding spot if it already knows where the player is
     }
 
     private bool isHidingSpot(GameObject other)

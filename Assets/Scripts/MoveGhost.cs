@@ -5,17 +5,20 @@ using UnityEngine.AI;
 
 public class MoveGhost : MonoBehaviour
 {
+    [HideInInspector]
+    public Transform HidingSpotPosition;
+
     [SerializeField]
     private GameObject player;//gives us a reference to the player so we can chaseeeee
 
-    [SerializeField]
-    private float ghostMoveSpeed, ghostRotationSpeed;
+    public float ghostMoveSpeed, ghostRotationSpeed;
 
     [SerializeField]
     private GameObject patrolPointsParent;//get the parent of all the points so I can get them in the script
 
     public List<Transform> patrolPoints;//this'll tell us where the ghost is going next
-    private Vector3 PatrolPointPosition
+
+    public Vector3 PatrolPointPosition
     {
         get  { return patrolPoints[patrolIndex].position; }//will always get the right value in the list so I only have to change the index
     }
@@ -64,6 +67,7 @@ public class MoveGhost : MonoBehaviour
         {
             Vector3.MoveTowards(transform.position, player.transform.position, ghostMoveSpeed * Time.deltaTime);
         }
+
         //IF CLOSE ENOUGH
         else
         {
@@ -71,12 +75,4 @@ public class MoveGhost : MonoBehaviour
         }
     }
 
-    public void CheckHidingSpot()
-    {
-        /*
-         * Get position();
-         * Get waypoint it's moving towards();
-       
-        */
-    }
 }

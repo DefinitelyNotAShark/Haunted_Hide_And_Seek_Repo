@@ -12,7 +12,7 @@ public class Node
     public int gCost, hCost;
     public int fCost { get { return gCost + hCost; } }
 
-    private int gridX, gridY;
+    public int gridX, gridY;
 
     public Node(bool isWall, Vector3 position, int gridX, int gridY)
     {
