@@ -10,22 +10,34 @@ public class LookGhost : MonoBehaviour
     [HideInInspector]
     public Vector3 LastKnownLocation;
 
+    [HideInInspector]
+    public List<Vector3> HidingSpotPositions;//add to list when deciding to check
+
+    private List<Vector3> HidingSpotsChecked = new List<Vector3>();
+
     private Animator animator;
 
-    private void OnTriggerEnter(Collider other)//change the state based on what the ghost sees
+    private void OnTriggerEnter(Collider other)//change;the state based on what the ghost sees
     {
         animator = GetComponentInParent<Animator>();
 
         if (isHidingSpot(other.gameObject) && shouldCheckHidingSpot())//if it sees a hiding spot and decides to check it,
         {
             Debug.Log("I am going to check this hiding spot");
+
+            if (!HidingSpotsChecked.Contains(other.transform.position))//get the hiding spot look point
+            {
+                Vector3 hidingSpotPositionToCheck = other.gameObject.GetComponentInChildren<hi>().gameObject.transform.position;
+            
+                HidingSpotPositions.Add(hidingSpotPositionToCheck);//add the transform to the list of spots to check if it hasn't already been added
+                HidingSpotsChecked.Add(hidingSpotPositionToCheck);//lets the ghost know not to check that one for a while
+            }
+
             animator.SetBool("CheckHidingSpot", true);
-            GetComponentInParent<Ghost>().HidingSpotPosition.Add(other.transform)
-        }
+        }        
 
         if (isPlayer(other.gameObject))
         {
-            Debug.Log("I know where you are");
             animator.SetBool("PlayerIsInLineOfSight", true);
         }
     }
@@ -55,23 +67,23 @@ public class LookGhost : MonoBehaviour
 
     private bool shouldCheckHidingSpot()//checks hiding spots 50% of the time while wandering and 100% of the time while seeking
     {
-        //if (animator.GetCurrentAnimatorStateInfo(0).IsName("Wandering"))//if it's wandering around, 50% chance it checks
-        //{
-        //    if (Random.Range(0, 2) == 1)//chooses a number between 0 and 1. On the chance that it's a 1, we check the spot. otherwise we don't
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("I decided not to check this hiding spot");
-        //        return false;
-        //    }
-        //}
-        //else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Seeking"))//if it's looking in a small area for the player, it always checks
-        //    return true;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Wandering"))//if it's wandering around, 50% chance it checks
+        {
+            if (Random.Range(0, 2) == 1)//chooses a number between 0 and 1. On the chance that it's a 1, we check the spot. otherwise we don't
+            {
+                return true;
+            }
+            else
+            {
+                Debug.Log("I decided not to check this hiding spot");
+                return false;
+            }
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Seeking"))//if it's looking in a small area for the player, it always checks
+            return true;
 
-        // else
-        return false;//it should not have to check a hiding spot if it already knows where the player is
+        else
+            return false;//it should not have to check a hiding spot if it already knows where the player is
     }
 
     private bool isHidingSpot(GameObject other)

@@ -16,7 +16,7 @@ public class CheckHidingSpotState : StateMachineBehaviour
     private float ghostRotationSpeed, ghostMoveSpeed;
     private int nodeIndex = 0;
 
-    private List<Vector3> hidingSpots;
+    private List<Vector3> hidingSpots = new List<Vector3>();
     private List<Node> path;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -27,7 +27,6 @@ public class CheckHidingSpotState : StateMachineBehaviour
 
         //GET GHOST PROPERTIES
         transform = ghost.transform;
-        hidingSpotPos = ghost.HidingSpotPosition.position;//set the position to look for;
         ghostRotationSpeed = ghost.ghostRotationSpeed;
         ghostMoveSpeed = ghost.ghostMoveSpeed;
 
@@ -35,17 +34,28 @@ public class CheckHidingSpotState : StateMachineBehaviour
         pathScript = pathfindingObject.GetComponent<Pathfinding>();
         gridScript = pathfindingObject.GetComponent<GridManager>();
 
+        hidingSpots = animator.GetComponentInChildren<LookGhost>().HidingSpotPositions;//get the list of positions to check
+
         path = new List<Node>();
 
-        //FIND PATH TO HIDING SPOT
-        pathScript.FindPath(transform.position, hidingSpotPos);
-        path = gridScript.FinalPath;
+        FindPathToHidingSpot();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        //IF THE GHOST HASN"T REACHED THE FINAL DESTINATION
-        if (!nodeIsAtDestination())
+        if (ghostIsAtDestination() && hidingSpots.Count > 0)//if we have more spots to check
+        {
+            hidingSpots.Remove(hidingSpots[0]);//remove the hiding spot from the list of spots to check     
+            nodeIndex = 0;//just there for a little extra oomph
+
+            if (hidingSpots.Count > 0)//if we still have a path to find...
+                FindPathToHidingSpot();//find a path to the next one
+            else         
+                animator.SetBool("CheckHidingSpot", false);//it really should go back to the previous state
+        }
+
+        //IF THE GHOST HASN"T REACHED THE FINAL DESTINATION AND STILL HAS A HIDING SPOT
+        else if (!ghostIsAtDestination() && hidingSpots.Count > 0)
         {
             //Get new node if you reaached the last one
             if (haveReachedNextNode() && nodeIndex < path.Count - 1)
@@ -60,15 +70,15 @@ public class CheckHidingSpotState : StateMachineBehaviour
             //MOVE
             transform.Translate(Vector3.forward * Time.deltaTime * ghostMoveSpeed);
         }
-        else animator.SetBool("CheckHidingSpot", false);//it really should go back to the previous state
+      
     }
 
-    private bool nodeIsAtDestination()
+    private bool ghostIsAtDestination()
     {
-        if(nodeIndex == gridScript.FinalPath.Count - 1 &&
+        if (nodeIndex == path.Count - 1 &&
             Vector3.Distance(transform.position, path[nodeIndex].position) < 1)//if I'm close enough to the final node
             return true;
-        
+
         else return false;
     }
 
@@ -78,5 +88,13 @@ public class CheckHidingSpotState : StateMachineBehaviour
             return true;
 
         else return false;
+    }
+
+    private void FindPathToHidingSpot()
+    {
+        //FIND PATH TO HIDING SPOT
+        nodeIndex = 0;//reset index each time a new path is found
+        pathScript.FindPath(transform.position, hidingSpots[0]);//find the first one
+        path = gridScript.FinalPath;
     }
 }

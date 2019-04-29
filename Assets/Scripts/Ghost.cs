@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Ghost : MonoBehaviour
 {
-    [HideInInspector]
-    public List<Transform> HidingSpotPosition;//add to list when deciding to check
-
     [SerializeField]
     private GameObject player;//gives us a reference to the player so we can chaseeeee
 
@@ -16,7 +13,7 @@ public class Ghost : MonoBehaviour
     private GameObject patrolPointsParent;//get the parent of all the points so I can get them in the script
 
     public List<Transform> patrolPoints;//this'll tell us where the ghost is going next
-
+    
     public int PointListCount
     {
         get{ return patrolPoints.Count; }
