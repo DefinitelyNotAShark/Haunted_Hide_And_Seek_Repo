@@ -53,18 +53,21 @@ public class ChaseState : StateMachineBehaviour
             animator.SetBool("PlayerIsInLineOfSight", false);//it looses track of your exact position
         }
 
+        UpdatePoint();
+
         if (path.Count > 1)//if the path is long enough to navigate
         {
             if (haveReachedNextNode() && nodeIndex < path.Count - 1)
                 nodeIndex++;//get new node 
 
-            UpdatePoint();
 
-            //ROTATE
+            //ROTATE        
             Quaternion targetRotation = Quaternion.LookRotation(path[nodeIndex].position - transform.position);//find where it's heading
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ghostRotationSpeed);//set the rotation to move towards where it's headed                                                                                                                   //MOVE
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ghostRotationSpeed);//set the rotation to move towards where it's headed 
+            //MOVE
             transform.Translate(Vector3.forward * Time.deltaTime * ghostMoveSpeed);
         }
+
         else//otherwise this means we're close enough to be caught
         {
             gameOver.GameOver();

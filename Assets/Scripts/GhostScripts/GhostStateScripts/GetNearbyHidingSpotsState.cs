@@ -10,7 +10,7 @@ public class GetNearbyHidingSpotsState : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        radius = 20;    
+        radius = 10;//get all hiding spots in a radius of 10
         ghostPos = animator.gameObject.transform.position;
 
         lookScript = animator.GetComponentInChildren<LookGhost>();
@@ -20,9 +20,10 @@ public class GetNearbyHidingSpotsState : StateMachineBehaviour
 
         foreach(Collider c in spotColliders)
         {
+
             if (c.gameObject.layer == 9)
             {
-                GameObject hidingSpotPos = c.GetComponentInChildren<HidingSpot>().gameObject;//get that position connected to the coll's child
+                GameObject hidingSpotPos = c.GetComponentInChildren<HidingSpot>().gameObject;//get that position connected to the coll's child               
                 lookScript.HidingSpotPositions.Add(hidingSpotPos);//add that
             }
         }

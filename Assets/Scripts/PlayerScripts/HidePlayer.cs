@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HidePlayer : MonoBehaviour
 {
     [SerializeField]
-    private Text hidePrompt;
+    private Text hidePrompt, hiddenPrompt;
 
     Renderer[] renderers;
     private MovePlayer moveScript;
@@ -18,6 +18,10 @@ public class HidePlayer : MonoBehaviour
 
     private void Start()
     {
+        //HIDE PROMPT TEXTS
+        RemovePromptHidden();
+        RemovePromptHide();
+
         isHidden = false;
         moveScript = GetComponent<MovePlayer>();
         renderers = GetComponentsInChildren<Renderer>();
@@ -50,7 +54,7 @@ public class HidePlayer : MonoBehaviour
             if (Input.GetButtonDown("Hide"))
                 Hide(hidingSpot);
         }
-        else if(isNearHidingSpot && isHidden)
+        else if(isHidden)
         {
             if (Input.GetButtonDown("Hide"))
             {
@@ -61,7 +65,9 @@ public class HidePlayer : MonoBehaviour
 
     private void Hide(GameObject spot)
     {
-        RemovePromptHide();
+        RemovePromptHide();//disable the "hide?"
+        PromptHidden();//show that the player is hidden
+
         isHidden = true;
         moveScript.canMove = false;
 
@@ -74,6 +80,8 @@ public class HidePlayer : MonoBehaviour
 
     private void ComeOut(GameObject spot)
     {
+        RemovePromptHidden();
+
         isHidden = false;
         moveScript.canMove = true;
 
@@ -86,11 +94,22 @@ public class HidePlayer : MonoBehaviour
 
     private void PromptHide()
     {
-        hidePrompt.gameObject.SetActive(true);
+        hidePrompt.gameObject.SetActive(true);//tell the player that they can hide      
     }
 
     private void RemovePromptHide()
     {
-        hidePrompt.gameObject.SetActive(false);
+        hidePrompt.gameObject.SetActive(false);//player can't hide here
     }
+
+    private void PromptHidden()
+    {
+        hiddenPrompt.gameObject.SetActive(true);//show the player that they're hiding
+    }
+
+    private void RemovePromptHidden()
+    {
+        hiddenPrompt.gameObject.SetActive(false);//also take away hidden prompt
+    }
+
 }

@@ -43,7 +43,7 @@ public class GoingToLastKnownLocationState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        if (!ghostIsAtDestination())
+        if (!ghostIsAtDestination() && path != null)
         {
             //Get new node if you reached the last one and it's not the final node
             if (haveReachedNextNode() && nodeIndex < path.Count - 1)
@@ -57,16 +57,13 @@ public class GoingToLastKnownLocationState : StateMachineBehaviour
                                                                                                                            //MOVE
             transform.Translate(Vector3.forward * Time.deltaTime * ghostMoveSpeed);
         }
-        else
-        {
-            Debug.Log("I'm at where I last saw the player");
-            animator.SetTrigger("GetHidingSpots");
-        }
+        else animator.SetTrigger("GetHidingSpots");
+        
     }
 
     private bool haveReachedNextNode()
     {
-        if (Vector3.Distance(transform.position, path[nodeIndex].position) < 1)//if we're close enough to the next node
+        if (Vector3.Distance(transform.position, path[nodeIndex].position) < 2)//if we're close enough to the next node
             return true;
 
         else return false;

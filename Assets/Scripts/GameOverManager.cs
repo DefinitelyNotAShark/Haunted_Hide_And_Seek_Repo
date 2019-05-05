@@ -8,7 +8,11 @@ public class GameOverManager : MonoBehaviour
     [SerializeField]
     private GameObject pausePanel;
 
-	void Start ()
+    private void Awake()
+    {
+        Time.timeScale = 1;
+    }
+    void Start ()
     {
         pausePanel.SetActive(false);//make sure it doesn't show up on start
 	}
@@ -16,15 +20,12 @@ public class GameOverManager : MonoBehaviour
 
     public void GameOver()
     {
-        Time.timeScale = 0f;//pause
+        Time.timeScale = 0;//pause
         ShowGameOver();//show the game over screen
     }
     public void Restart()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("MainScene");
-
-        Debug.Log("timescale is " + Time.timeScale.ToString());
     }
 
     void ShowGameOver()

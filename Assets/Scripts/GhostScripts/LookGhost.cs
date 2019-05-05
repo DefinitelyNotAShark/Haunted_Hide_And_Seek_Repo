@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class LookGhost : MonoBehaviour
 {
-    [SerializeField]
-    private float lengthOfSight;
-
     [HideInInspector]
     public Vector3 LastKnownLocation;
 
@@ -16,7 +13,6 @@ public class LookGhost : MonoBehaviour
     private List<GameObject> HidingSpotsChecked = new List<GameObject>();
 
     private Animator animator;
-    private int radiusDistance;
 
     private void OnTriggerEnter(Collider other)//change;the state based on what the ghost sees
     {
@@ -57,30 +53,23 @@ public class LookGhost : MonoBehaviour
         if (isPlayer(other.gameObject))
         {
             Debug.Log("I know where you were, and am going to check around it");
-            animator.SetBool("HasSeenPlayer", true);//remembers that it saw the player for the duration of the seeking state            
+            animator.SetBool("HasSeenPlayer", true);//remembers that it saw the player for the duration of the seeking state
+            //animator.SetBool("PlayerIsInLineOfSight", false);//can't directly see the player anymore, but it can keep it's sense of where it is 
             LastKnownLocation = other.transform.position;//this is where we're going to go 
         }
     }
 
-    private bool shouldCheckHidingSpot()//checks hiding spots 50% of the time while wandering and 100% of the time while seeking
+    private bool shouldCheckHidingSpot()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Wandering"))//if it's wandering around, 50% chance it checks
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Wandering"))//if it's wandering around, 20% chance it checks
         {
-            if (Random.Range(0, 2) == 1)//chooses a number between 0 and 1. On the chance that it's a 1, we check the spot. otherwise we don't
+            if (Random.Range(0, 5) == 1)//chooses a number between 0 and 5. On the chance that it's a 1, we check the spot. otherwise we don't
             {
                 return true;
             }
-            else
-            {
-                Debug.Log("I decided not to check this hiding spot");
-                return false;
-            }
+            else return false;
         }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Seeking"))//if it's looking in a small area for the player, it always checks
-            return true;
-
-        else
-            return false;//it should not have to check a hiding spot if it already knows where the player is
+        else return false;//the seeking state should know what spots to check with a radius. Has a specific list to check
     }
 
     private bool isHidingSpot(GameObject other)
@@ -91,17 +80,12 @@ public class LookGhost : MonoBehaviour
         else return false;
     }
 
-    private bool isPlayer(GameObject other)
+    private bool isPlayer(GameObject other)//raycasts to the object and sees if it's the player and if it's not hiding behind a wall
     {
-        if (other.layer == 10)//if the object is the player
-        {
-            if (other.gameObject.GetComponent<HidePlayer>().isHidden)//if the player's hidden, we can't see them
-                return false;
+        if (other.layer == 10)
+            return true;
 
-            else return true;//if the player isn't hidden, we can see them
-        }
-
-        else return false;//if it's not on that layer, it doesn't count as the player
+        else return false;
     }
 
 
