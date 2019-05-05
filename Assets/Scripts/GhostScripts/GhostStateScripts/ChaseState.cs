@@ -15,6 +15,9 @@ public class ChaseState : StateMachineBehaviour
     private Vector3 playerPosition;
     private float ghostRotationSpeed, ghostMoveSpeed;
 
+    private HidePlayer playerHideScript;
+    private GameOverManager gameOver;
+
     private int nodeIndex = 0;
     private List<Node> path;
 
@@ -34,6 +37,8 @@ public class ChaseState : StateMachineBehaviour
         pathScript = pathfindingObject.GetComponent<Pathfinding>();
         gridScript = pathfindingObject.GetComponent<GridManager>();
 
+        gameOver = GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverManager>();//get the ref to the game over script
+        playerHideScript = player.GetComponentInParent<HidePlayer>();//get a reference so we know when the player is hiding (in the parent of the player)
         
         path = new List<Node>();
 
@@ -43,17 +48,27 @@ public class ChaseState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        //Get new node if you reaached the last one
-        if (haveReachedNextNode() && nodeIndex < path.Count - 1)
-            nodeIndex++;//get new node 
+        if (path.Count > 13 || playerHideScript.isHidden)//if you're too far away for the ghost to sense you, or you start hiding
+        {
+            animator.SetBool("PlayerIsInLineOfSight", false);//it looses track of your exact position
+        }
 
-        UpdatePoint();
+        if (path.Count > 1)//if the path is long enough to navigate
+        {
+            if (haveReachedNextNode() && nodeIndex < path.Count - 1)
+                nodeIndex++;//get new node 
 
-        //ROTATE
-        Quaternion targetRotation = Quaternion.LookRotation(path[nodeIndex].position - transform.position);//find where it's heading
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ghostRotationSpeed);//set the rotation to move towards where it's headed
-                                                                                                                       //MOVE
-        transform.Translate(Vector3.forward * Time.deltaTime * ghostMoveSpeed);
+            UpdatePoint();
+
+            //ROTATE
+            Quaternion targetRotation = Quaternion.LookRotation(path[nodeIndex].position - transform.position);//find where it's heading
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * ghostRotationSpeed);//set the rotation to move towards where it's headed                                                                                                                   //MOVE
+            transform.Translate(Vector3.forward * Time.deltaTime * ghostMoveSpeed);
+        }
+        else//otherwise this means we're close enough to be caught
+        {
+            gameOver.GameOver();
+        }
     }
 
     private bool haveReachedNextNode()

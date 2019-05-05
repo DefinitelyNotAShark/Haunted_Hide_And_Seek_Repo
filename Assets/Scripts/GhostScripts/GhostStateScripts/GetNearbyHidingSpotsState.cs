@@ -22,7 +22,7 @@ public class GetNearbyHidingSpotsState : StateMachineBehaviour
         {
             if (c.gameObject.layer == 9)
             {
-                Vector3 hidingSpotPos = c.GetComponentInChildren<hi>().gameObject.transform.position;//get that position connected to the coll's child
+                GameObject hidingSpotPos = c.GetComponentInChildren<HidingSpot>().gameObject;//get that position connected to the coll's child
                 lookScript.HidingSpotPositions.Add(hidingSpotPos);//add that
             }
         }

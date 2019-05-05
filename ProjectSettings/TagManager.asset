@@ -9,6 +9,7 @@ TagManager:
   - Start
   - End
   - Pathfinder
+  - GameOver
   layers:
   - Default
   - TransparentFX

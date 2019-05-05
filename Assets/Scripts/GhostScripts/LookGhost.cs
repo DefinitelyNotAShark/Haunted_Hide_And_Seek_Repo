@@ -11,11 +11,12 @@ public class LookGhost : MonoBehaviour
     public Vector3 LastKnownLocation;
 
     [HideInInspector]
-    public List<Vector3> HidingSpotPositions;//add to list when deciding to check
+    public List<GameObject> HidingSpotPositions = new List<GameObject>();//add to list when deciding to check
 
-    private List<Vector3> HidingSpotsChecked = new List<Vector3>();
+    private List<GameObject> HidingSpotsChecked = new List<GameObject>();
 
     private Animator animator;
+    private int radiusDistance;
 
     private void OnTriggerEnter(Collider other)//change;the state based on what the ghost sees
     {
@@ -23,8 +24,7 @@ public class LookGhost : MonoBehaviour
 
         if (isHidingSpot(other.gameObject) && shouldCheckHidingSpot())//if it sees a hiding spot and decides to check it,
         {
-            Debug.Log("I am going to check this hiding spot");
-                Vector3 hidingSpotPositionToCheck = other.gameObject.GetComponentInChildren<hi>().gameObject.transform.position;
+            GameObject hidingSpotPositionToCheck = other.gameObject.GetComponentInChildren<HidingSpot>().gameObject;
 
             if (!HidingSpotsChecked.Contains(hidingSpotPositionToCheck))//get the hiding spot look point
             {
@@ -32,7 +32,7 @@ public class LookGhost : MonoBehaviour
                 HidingSpotsChecked.Add(hidingSpotPositionToCheck);//lets the ghost know not to check that one for a while...clear it when seeking
                 animator.SetBool("CheckHidingSpot", true);
             }
-        }        
+        }      
 
         if (isPlayer(other.gameObject))
         {
@@ -57,8 +57,7 @@ public class LookGhost : MonoBehaviour
         if (isPlayer(other.gameObject))
         {
             Debug.Log("I know where you were, and am going to check around it");
-            animator.SetBool("HasSeenPlayer", true);//remembers that it saw the player for the duration of the seeking state
-            animator.SetBool("PlayerIsInLineOfSight", false);//can't directly see the player anymore
+            animator.SetBool("HasSeenPlayer", true);//remembers that it saw the player for the duration of the seeking state            
             LastKnownLocation = other.transform.position;//this is where we're going to go 
         }
     }
@@ -94,10 +93,15 @@ public class LookGhost : MonoBehaviour
 
     private bool isPlayer(GameObject other)
     {
-        if (other.layer == 10)//player layer
-            return true;
+        if (other.layer == 10)//if the object is the player
+        {
+            if (other.gameObject.GetComponent<HidePlayer>().isHidden)//if the player's hidden, we can't see them
+                return false;
 
-        else return false;
+            else return true;//if the player isn't hidden, we can see them
+        }
+
+        else return false;//if it's not on that layer, it doesn't count as the player
     }
 
 

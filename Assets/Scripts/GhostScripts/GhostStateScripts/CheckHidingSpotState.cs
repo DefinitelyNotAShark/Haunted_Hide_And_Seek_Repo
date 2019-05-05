@@ -10,13 +10,15 @@ public class CheckHidingSpotState : StateMachineBehaviour
     private GameObject pathfindingObject;
     private Pathfinding pathScript;
     private GridManager gridScript;
+    //GameOver ref
+    private GameOverManager gameOver;
 
     private Transform transform;
 
     private float ghostRotationSpeed, ghostMoveSpeed;
     private int nodeIndex = 0;
 
-    private List<Vector3> hidingSpots = new List<Vector3>();
+    private List<GameObject> hidingSpots = new List<GameObject>();
     private List<Node> path;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
@@ -34,6 +36,8 @@ public class CheckHidingSpotState : StateMachineBehaviour
         pathScript = pathfindingObject.GetComponent<Pathfinding>();
         gridScript = pathfindingObject.GetComponent<GridManager>();
 
+        gameOver = GameObject.FindGameObjectWithTag("GameOver").GetComponent<GameOverManager>();
+
         hidingSpots = animator.GetComponentInChildren<LookGhost>().HidingSpotPositions;//get the list of positions to check
 
         path = new List<Node>();
@@ -43,8 +47,16 @@ public class CheckHidingSpotState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        if (ghostIsAtDestination() && hidingSpots.Count > 0)//if we have more spots to check
+        if (ghostIsAtDestination())//if we got there...
         {
+            if (hidingSpots[0].GetComponentInChildren<HidingSpot>().PlayerIsHiddenHere)//if the player happens to be here...
+            {
+                Debug.Log("GOT YOU!");
+                gameOver.GameOver();//do the gameover
+                //Trigger game over
+            }
+
+
             hidingSpots.Remove(hidingSpots[0]);//remove the hiding spot from the list of spots to check     
             nodeIndex = 0;//just there for a little extra oomph
 
@@ -94,7 +106,7 @@ public class CheckHidingSpotState : StateMachineBehaviour
     {
         //FIND PATH TO HIDING SPOT
         nodeIndex = 0;//reset index each time a new path is found
-        pathScript.FindPath(transform.position, hidingSpots[0]);//find the first one
+        pathScript.FindPath(transform.position, hidingSpots[0].transform.position);//find the first one
         path = gridScript.FinalPath;
     }
 }

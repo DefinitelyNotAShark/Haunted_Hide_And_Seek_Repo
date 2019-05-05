@@ -11,12 +11,14 @@ public class HidePlayer : MonoBehaviour
     Renderer[] renderers;
     private MovePlayer moveScript;
 
+    private GameObject hidingSpot;//keep track of the hiding spot that we're closest to. Set every time player gets in range
 
-    private bool isHidden = false;
+    public bool isHidden { get; private set; }
     private bool isNearHidingSpot = false;
 
     private void Start()
     {
+        isHidden = false;
         moveScript = GetComponent<MovePlayer>();
         renderers = GetComponentsInChildren<Renderer>();
     }
@@ -27,6 +29,7 @@ public class HidePlayer : MonoBehaviour
         {
             isNearHidingSpot = true;
             PromptHide();
+            hidingSpot = other.gameObject;
         }
     }
 
@@ -36,6 +39,7 @@ public class HidePlayer : MonoBehaviour
         {
             isNearHidingSpot = false;
             RemovePromptHide();
+            hidingSpot = null;//set it back to null to make sure you absolutely can't hide there 
         }
     }
 
@@ -44,32 +48,36 @@ public class HidePlayer : MonoBehaviour
         if (isNearHidingSpot && !isHidden)
         {
             if (Input.GetButtonDown("Hide"))
-                Hide();
+                Hide(hidingSpot);
         }
         else if(isNearHidingSpot && isHidden)
         {
             if (Input.GetButtonDown("Hide"))
             {
-                ComeOut();
+                ComeOut(hidingSpot);
             }
         }
     }
 
-    private void Hide()
+    private void Hide(GameObject spot)
     {
         RemovePromptHide();
         isHidden = true;
         moveScript.canMove = false;
+
+        spot.GetComponentInChildren<HidingSpot>().PlayerIsHiddenHere = true;
 
         //MAKE INVISIBLE
         foreach (Renderer r in renderers)
             r.enabled = false;
     }
 
-    private void ComeOut()
+    private void ComeOut(GameObject spot)
     {
         isHidden = false;
         moveScript.canMove = true;
+
+        spot.GetComponentInChildren<HidingSpot>().PlayerIsHiddenHere = false;
 
         //MAKE VISIBLE
         foreach (Renderer r in renderers)
